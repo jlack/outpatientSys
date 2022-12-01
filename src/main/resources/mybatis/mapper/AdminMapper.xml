@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace写全类名，这个xml是写sql语句的，对应相应的mapper.xml-->
+<mapper namespace="com.example.outpatientsys.mapper.AdminMapper">
+    <insert id="addAdmin" >
+        INSERT INTO t_admin
+        (username,`password`,salt)
+        VALUES (
+                   #{adminName},#{password},#{salt}
+               )
+    </insert>
+    <select id="queryAdminByAdminName" resultType="com.sample.Admin">
+        select * from t_admin where username = #{adminName}
+    </select>
+
+</mapper>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员主页</title>
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+</head>
+
+<body>
+<div class="div-side-bar">
+    <input type="button" value="添加医生" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/doctorRegister.html'">
+    <input type="button" value="排班表" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/rosterTable.html'">
+    <input type="button" value="门诊记录" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/allOutpatientRecords.html'">
+    <input type="button" value="医生列表" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/doctorList.html'">
+    <input type="button" value="病人列表" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/patientList.html'">
+<!--    <input type="button" value="添加管理员" onClick="parent.parent.adminFrame.location.href='http://localhost:8098/web/adminRegister.html'">-->
+</div>
+<iframe id="adminFrame" name="adminFrame" src="http://localhost:8098/web/welcome.html"></iframe>
+</body>
+</html>

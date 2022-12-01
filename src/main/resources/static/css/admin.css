@@ -1,0 +1,44 @@
+body {
+    background: #f3f3f3;
+}
+
+.div-side-bar {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background: #e5d9d9;
+    border-radius: 5px;
+    border: #4a4a4a;
+}
+
+iframe[name="adminFrame"], iframe[name="doctorFrame"], iframe[name="patientFrame"]{
+    position: absolute;
+    width: 98%;
+    height: 80%;
+    top: 130px;
+    border: 2px solid #e5d9d9;
+}
+
+
+input[type="button"] {
+    margin: 15px;
+    width: 250px;
+    height: 60px;
+    background-color: #00dd60;
+    text-align: center;
+    line-height: 50px;
+    border: 2px solid #adadad;
+    border-radius: 10px;
+    letter-spacing: 8px;
+    font-size: 120%;
+    cursor: pointer;
+}
+
+input[type="button"]:hover{
+    background: #d57474;
+}

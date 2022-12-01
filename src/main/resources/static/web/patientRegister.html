@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册界面</title>
+    <link rel="stylesheet" type="text/css" href="../css/change.css">
+    <script src="../js/change.js"></script>
+    <!--    <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.1.js"></script>-->
+    <script src="../js/jquery-3.6.1.js"></script>
+
+    <script>
+        function register(){
+            let username = $("#username").val();
+            let password = $("#password").val();
+            let trueName = $("#trueName").val();
+            let idNum = $("#idNum").val();
+            let phone = $("#phone").val();
+
+            if (username == "" || password == "" || trueName=="" || idNum == "" || phone == ""){
+                alert("请先填写所有的信息！");
+                return false;
+            }
+
+            let nameCheck = /^\w{2,12}$/;
+
+            if (!(nameCheck.test(username))){
+                alert("用户名必须是2-12位的字母和数字");
+                return false;
+            }
+
+            //验证密码是否符合规则
+            let passCheck = /^\w{5,12}$/;
+            if (!passCheck.test(password)){
+                alert("密码必须是5-12位的字母和数字");
+                return false;
+            }
+
+            let idCheck = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+            if (!idCheck.test(idNum)){
+                alert("请正确输入身份证号码");
+                return false;
+            }
+            //手机号正则
+            let phoneCheck = /^1[34578]\d{9}$/;
+            if (!phoneCheck.test(phone)){
+                alert("请正确输入手机号码");
+                return false;
+            }
+
+            $.ajax({
+                url : "/patient/register",
+                type: "post",
+                data: $("#form-reg").serialize(), //获取表单的所有内容
+                dataType: "json",
+                success: function (res) {
+                    if (res.status === 200){
+                        alert("注册成功！")
+                        location.href = "patientLogin.html"
+                    }else {
+                        alert(res.message)
+                    }
+                },
+                error: function (error) {
+                    alert(error.status + "错误,服务器出现故障，请等待攻城狮修复！！")
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+<form style="padding-top: 10px" id="form-reg" class="form-horizontal" role="form">
+    <div class="control">
+        <div class="item">
+            <div>登录</div><div class="active">注册</div>
+        </div>
+        <div class="content">
+            <div style="display: block;">
+
+                <p>用户名</p>
+                <input type="text" placeholder="用户名" id="username" name="username">
+                <p>密码</p>
+                <input type="password" placeholder="密码" id="password" name="password">
+                <p>真实姓名</p>
+                <input type="text" placeholder="真实姓名" id="trueName" name="trueName">
+                <p>身份证号码</p>
+                <input type="text" placeholder="18位身份证号码" id="idNum" name="idNum">
+                <p>电话号码</p>
+                <input type="text" placeholder="11位手机号码" id="phone" name="phone">
+                <br>
+
+
+                <input type="button" value="注册" id="btn-reg" onclick="register()">
+            </div>
+        </div>
+    </div></form></body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>病人主页</title>
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+</head>
+<body>
+<div class="div-side-bar">
+    <input type="button" value="门诊预约" onClick="parent.parent.patientFrame.location.href='http://localhost:8098/web/outpatientAppointment.html'">
+    <input type="button" value="排班表" onClick="parent.parent.patientFrame.location.href='http://localhost:8098/web/rosterTable.html'">
+    <input type="button" value="我的门诊记录" onClick="parent.parent.patientFrame.location.href='http://localhost:8098/web/personalOutpatientRecords.html'">
+    <input type="button" value="查看医生列表" onClick="parent.parent.patientFrame.location.href='http://localhost:8098/web/doctorList.html'">
+    <input type="button" value="个人信息" onClick="parent.parent.patientFrame.location.href='http://localhost:8098/web/personInfo.html'">
+</div>
+<iframe class="iframe" name="patientFrame" src="http://localhost:8098/web/welcome.html" width="1000px" height="400px"></iframe>
+</body>
+</html>

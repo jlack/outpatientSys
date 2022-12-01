@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排班表</title>
+    <style>
+        .tr-title {
+            text-align: center;
+        }
+    </style>
+    <script src="../js/jquery-3.6.1.js"></script>
+    <script>
+        window.onload = function () {
+            $.ajax({
+                type: "get",
+                url: "/roster/getRosterTable",
+                dataType: "json",
+                success: function (res) {
+                    var str = "";//定义用于拼接的字符串
+                    for (var i = 0; i < 4; i++) {
+                        //拼接表格的行和列
+                        if (i===0){
+                            str = "<tr>" +
+                                "<td class='td1'>" + "00:00-07:00" + "</td>";
+                        }else if (i===1){
+                            str = "<tr>" +
+                                "<td class='td1'>" + "07:00-15:00" + "</td>";
+                        }else if (i===2){
+                            str = "<tr>" +
+                                "<td class='td1'>" + "15:00-23:00" + "</td>";
+                        }else if (i===3){
+                            str = "<tr>" +
+                                "<td class='td1'>" + "23:00-00:00" + "</td>";
+                        }
+                        str = str +
+                            "<td class='td1'>" + res.data[i].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+4].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+8].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+12].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+16].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+20].doctorInfo + "</td>" +
+                            "<td class='td1'>" + res.data[i+24].doctorInfo + "</td>" +
+                            "</tr>"
+                        //追加到table中
+                        console.log(str);
+                        $("#roster-table").append(str);
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<p align="center">排班表</p>
+<table border="5px" width="1200px" height="400px" align="center" id="roster-table">
+    <tbody>
+    <tr class="tr-title">
+        <td class="td-title"></td>
+        <td class="td-title">周一</td>
+        <td class="td-title">周二</td>
+        <td class="td-title">周三</td>
+        <td class="td-title">周四</td>
+        <td class="td-title">周五</td>
+        <td class="td-title">周六</td>
+        <td class="td-title">周天</td>
+    </tr>
+
+
+    </tbody>
+
+</table>
+</body>
+</html>

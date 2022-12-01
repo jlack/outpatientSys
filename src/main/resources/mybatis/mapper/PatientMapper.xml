@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace写全类名，这个xml是写sql语句的，对应相应的mapper.xml-->
+<mapper namespace="com.example.outpatientsys.mapper.PatientMapper">
+    <insert id="addPatient" >
+        INSERT INTO t_patient
+            (patient_name,`password`,salt,true_name,born_date,id_num,phone,gender,is_delete)
+        VALUES (
+                   #{patientName},#{password},#{salt},#{trueName},#{bornDate},#{idNum},#{phone},#{gender},#{isDelete}
+               )
+    </insert>
+
+    <select id="queryPatientByPatientName" resultType="com.sample.Patient">
+        select * from t_patient where patient_name = #{patientName}
+    </select>
+
+    <update id="updatePatientInfo">
+        update t_patient set
+        <if test="born_date != null and born_date != ''">
+            born_date = #{borndate},
+        </if>
+        <if test="id_num != null and id_num != ''">
+            id_num = #{idNum},
+        </if>
+        <if test="phone != null and phone != ''">
+            phone = #{phone},
+        </if>
+        <if test="gender != null ">
+            gender = #{gender},
+        </if>
+        where patient_id = #{patientId}
+    </update>
+</mapper>

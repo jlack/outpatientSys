@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>医生列表</title>
+    <script src="../js/jquery-3.6.1.js"></script>
+    <style>
+        #doctor-list-table{
+            /*width: 600px;*/
+            /*height: 400px;*/
+        }
+        .td1 {padding:20px}
+        .td-desc {padding: 20px; width: 600px}
+        .td-title{padding-bottom:20px;
+            padding-top: 20px;
+            text-align: center;}
+    </style>
+    <script>
+        window.onload = function () {
+            $.ajax({
+                type: "get",
+                url: "/doctor/getAllDoctor",
+                dataType: "json",
+                // data: { organizationId: organizationID},
+                // contentType: 'application/json',
+                success: function (res) {
+                    var str = "";//定义用于拼接的字符串
+                    for (var i = 0; i < res.data.length; i++) {
+                        //拼接表格的行和列
+                        str = "<tr>" +
+                            // <img src="image.jpg">
+                            // res.data[i].avatar
+                            "<td>" + '<img src="' + res.data[i].avatar +'" width="120" height="130">' + "</td>" +
+                            "<td class='td1'>" + res.data[i].trueName + "</td>" +
+                            "<td class='td-desc'>" + res.data[i].description + "</td>" +
+                            "</tr>";
+                        //追加到table中
+                        $("#doctor-list-table").append(str);
+                    }
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<table id="doctor-list-table" align="center" border="5px">
+    <tbody>
+    <tr>
+        <td class="td-title">头像</td>
+        <td class="td-title">姓名</td>
+        <td class="td-title">简介</td>
+    </tr>
+    </tbody>
+</body>
+</html>

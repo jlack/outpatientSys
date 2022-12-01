@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace写全类名，这个xml是写sql语句的，对应相应的mapper.xml-->
+<mapper namespace="com.example.outpatientsys.mapper.DoctorMapper">
+    <insert id="addDoctor">
+        INSERT INTO t_doctor
+            (doctor_name, `password`, salt, true_name, phone, gender)
+        VALUES (#{doctorName}, #{password}, #{salt}, #{trueName}, #{phone}, #{gender})
+    </insert>
+    <select id="queryDoctorByDoctorName" resultType="com.sample.Doctor">
+        select * from t_doctor where doctor_name = #{doctorName} and is_delete = 0
+    </select>
+    <select id="queryAllDoctor" resultType="com.sample.Doctor">
+        select * from t_doctor where is_delete = 0
+    </select>
+    <select id="getRosterTable" resultType="com.sample.Roster">
+        SELECT * FROM t_roster
+    </select>
+</mapper>

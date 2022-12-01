@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>医生登录界面</title>
+    <link rel="stylesheet" type="text/css" href="../css/change.css">
+    <script src="../js/changeDoctor.js"></script>
+    <!--    <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.1.js"></script>-->
+    <script src="../js/jquery-3.6.1.js"></script>
+
+    <script>
+        function login(){
+            let username = $("#username").val();
+            let password = $("#password").val();
+
+
+            if (username == "" || password == ""){
+                alert("请先填写所有的信息！");
+                return false;
+            }
+
+            let nameCheck = /^\w{2,12}$/;
+
+            if (!(nameCheck.test(username))){
+                alert("用户名必须是2-12位的字母和数字");
+                return false;
+            }
+
+            //验证密码是否符合规则
+            let passCheck = /^\w{5,12}$/;
+            if (!passCheck.test(password)){
+                alert("密码必须是5-12位的字母和数字");
+                return false;
+            }
+
+
+            $.ajax({
+                url : "/doctor/login",
+                type: "get",
+                data: $("#form-login").serialize(), //获取表单的所有内容
+                dataType: "json",
+                success: function (res) {
+                    if (res.status === 200){
+                        alert("登录成功！")
+                        location.href = "doctorIndex.html"
+                    }else {
+                        alert(res.message)
+                    }
+                },
+                error: function (error) {
+                    alert(error.status + "错误,服务器出现故障，请等待攻城狮修复！！")
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+<form style="padding-top: 10px" id="form-login" class="form-horizontal" role="form">
+    <div class="control">
+        <div class="item">
+            <div class="active">医生登录</div><div>管理员登录</div>
+        </div>
+        <div class="content">
+            <div style="display: block;">
+
+                <p>用户名</p>
+                <input type="text" placeholder="用户名" id="username" name="username">
+                <p>密码</p>
+                <input type="password" placeholder="密码" id="password" name="password">
+
+
+
+                <input type="button" value="登录" id="btn-login" onclick="login()">
+            </div>
+        </div>
+    </div></form></body>
+</html>
